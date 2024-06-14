@@ -1,4 +1,4 @@
-#use oc new-app quay.io/rhn_support_satripat/python-hello:v1  
+#use oc new-app quay.io/rhn_xxxx_satripat/python-hello:v1  
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -29,7 +29,7 @@ spec:
         deployment: python-v2
     spec:
       containers:
-      - image: quay.io/rhn_support_satripat/python-hello:v1
+      - image: quay.io/rhn_xxxx_satripat/python-hello:v1
         imagePullPolicy: IfNotPresent
         name: python-v2
         ports:
