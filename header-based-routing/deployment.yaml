@@ -1,0 +1,110 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    version: v1
+    type: python
+  name: python-v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      version: v1
+      type: python
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      creationTimestamp: null
+      labels:
+        type: python
+        version: v1
+    spec:
+      containers:
+      - image: quay.io/rhn_support_satripat/hello-python-v1:v1
+        imagePullPolicy: Always
+        name: python-v1
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 8000
+          protocol: TCP
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    version: v2
+    type: python
+  name: python-v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      version: v2
+      type: python
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      creationTimestamp: null
+      labels:
+        type: python
+        version: v2
+    spec:
+      containers:
+      - image: quay.io/rhn_support_satripat/hello-python-v2:v1
+        imagePullPolicy: Always
+        name: python-v2
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 8000
+          protocol: TCP
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    type: python
+  name: python-svc
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: 8000-tcp
+    port: 8000
+    protocol: TCP
+    targetPort: 8000
+  - name: 8080-tcp
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    type: python
+  sessionAffinity: None
+  type: ClusterIP

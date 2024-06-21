@@ -1,0 +1,39 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: python-vs
+spec:
+  hosts:
+    - "python-vs-testing.apps.killer.lab.upshift.rdu2.redhat.com"
+  gateways:
+    - python-gw
+  http:
+    - match:
+      - uri:
+          prefix: "/abc"
+      - headers:
+          end-user:
+             exact: jason
+      rewrite:
+        uri: '/'
+      route:
+      - destination:
+           host: python-svc
+           port:
+             number: 8000
+           subset: python-v1
+    - match:
+      - uri:
+          prefix: "/abc"
+      - headers:
+          end-user:
+             exact: alex
+      rewrite:
+        uri: '/'
+      route:
+      - destination:
+           host: python-svc
+           port:
+             number: 8000
+           subset: python-v2
+

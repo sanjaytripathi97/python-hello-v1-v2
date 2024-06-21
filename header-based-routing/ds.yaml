@@ -1,0 +1,13 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: python-dr
+spec:
+  host: python-svc
+  subsets:
+  - labels:
+      version: v1
+    name: python-v1
+  - labels:
+      version: v2
+    name: python-v2
