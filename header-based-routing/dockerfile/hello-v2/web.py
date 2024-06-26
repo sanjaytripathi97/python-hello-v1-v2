@@ -1,15 +1,22 @@
-#
-# A very simple Python HTTP server
-#
-
 import http.server
 import socketserver
+import logging
 
 PORT = 8000
 
-Handler = http.server.SimpleHTTPRequestHandler
+class CustomHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        # Log the request headers
+        logging.info(f"Headers: {self.headers}")
+        logging.info("=" * 30)  # Print separator line
 
-httpd = socketserver.TCPServer(("", PORT), Handler)
+        # Call the superclass method to handle the request
+        super().do_GET()
 
-print("serving at port", PORT)
-httpd.serve_forever()
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    Handler = CustomHTTPRequestHandler
+
+    with socketserver.TCPServer(("", PORT), Handler) as httpd:
+        print("Serving at port", PORT)
+        httpd.serve_forever()
