@@ -4,4 +4,6 @@ EXPOSE 8000
 
 COPY . /opt/app-root/src
 
+WORKDIR /opt/app-root/src
+
 CMD /bin/bash -c 'python3 -u web.py'
