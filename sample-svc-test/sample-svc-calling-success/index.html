@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World from Python V1!</title>
+    <script>
+        function fetchHeaders() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        document.getElementById("headers").innerHTML = xhr.responseText;
+                    } else {
+                        document.getElementById("headers").innerHTML = 'Error fetching headers: ' + xhr.status;
+                    }
+                }
+            };
+            xhr.open('GET', '/fetch_headers', true); // Send request to /fetch_headers endpoint
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    <h1>Hello, World from Python V1!</h1>
+    <button onclick="fetchHeaders()">Fetch Headers</button>
+    <div id="headers"></div>
+</body>
+</html>
+
+~

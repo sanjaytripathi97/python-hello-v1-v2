@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World from Python V1!</title>
+    <script>
+        function fetchImage(endpoint) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var contentType = xhr.getResponseHeader('Content-Type');
+                        var imageUrl = URL.createObjectURL(new Blob([xhr.response], { type: contentType }));
+                        var imageElement = document.createElement('img');
+                        imageElement.src = imageUrl;
+                        document.getElementById("images").appendChild(imageElement);
+                    } else {
+                        document.getElementById("images").innerHTML = 'Error fetching image: ' + xhr.status;
+                    }
+                }
+            };
+            xhr.open('GET', endpoint, true);
+            xhr.responseType = 'arraybuffer';
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    <h1>Hello, World from Python V1!</h1>
+    <button onclick="fetchImage('/fetch_picture')">Fetch Picture</button>
+    <button onclick="fetchImage('/fetch_fox')">Fetch Fox</button>
+    <div id="images"></div>
+</body>
+</html>
