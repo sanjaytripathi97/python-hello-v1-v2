@@ -4,7 +4,7 @@ metadata:
   name: python-vs
 spec:
   hosts:
-    - "python-vs-testing.apps.killer.lab.upshift.rdu2.redhat.com"
+    - "xxxxxxxx"
   gateways:
     - python-gw
   http:
