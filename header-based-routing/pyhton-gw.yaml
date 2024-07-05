@@ -11,4 +11,4 @@ spec:
         name: http
         protocol: HTTP
       hosts:
-        - "python-vs-testing.apps.killer.lab.upshift.rdu2.redhat.com"
+        - "xxxxxxxx"
