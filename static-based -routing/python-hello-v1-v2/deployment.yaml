@@ -1,4 +1,4 @@
-#use oc new-app quay.io/rhn_support_satripat/python-hello:v1  
+#use oc new-app <image-name>  
 apiVersion: apps/v1
 kind: Deployment
 metadata:
