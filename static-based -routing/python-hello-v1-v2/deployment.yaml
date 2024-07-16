@@ -29,7 +29,7 @@ spec:
         deployment: python-v2
     spec:
       containers:
-      - image: quay.io/rhn_support_satripat/python-hello:v1
+      - image: <>
         imagePullPolicy: IfNotPresent
         name: python-v2
         ports:
