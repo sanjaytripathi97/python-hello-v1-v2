@@ -1,0 +1,58 @@
+MAke changes in SMCP for the numproxies.
+
+DOC:- https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers#config-http-conn-man-headers-x-forwarded-for
+      https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#:~:text=Required-,numTrustedProxies,-uint32
+~~~
+techPreview:
+    meshConfig:
+      defaultConfig:
+        gatewayTopology:
+          numTrustedProxies: 1
+~~~
+
+oc exec -ti istio-ingressgateway-7bc99bc96-47hqj -- cat etc/istio/config/mesh
+// check numproxied value here
+
+trace level logs for the pod:
+###### DEBUG envoyy
+oc exec pod-name --  curl -X POST localhost:15000/logging?level=debug
+###### TRACE envoyy
+oc exec pod-name --  curl -X POST localhost:15000/logging?level=trace
+###### INFO envoyy
+oc exec pod-name --  curl -X POST localhost:15000/logging?level=info
+
+VS:-
+~~~
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: python-vs
+  namespace: reproducer1
+spec:
+  gateways:
+  - python-gw
+  hosts:
+  - testing-reproducer.apps.xxxx.lab.psi.xxxx.xxxx.com
+  http:
+  - match:
+    - headers:
+        x-envoy-external-address:
+          exact: 10.xx.24.xx
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: python-svc.reproducer1.svc.cluster.local
+        port:
+          number: 8000
+  - route:
+    - destination:
+        host: python-svc.reproducer2.svc.cluster.local
+        port:
+          number: 8000
+~~~
+
+by default X-forwarded-for having 2-3 IP's consist of client IP, routerpod Ip and all inbetween hops, but need to do IP based routing using clinet IP.
+by default x-envoy-external-address have router pod IP address? how to get single client IP, in XFF it is not possible, but we can have the x-envoy-external-address contaions client IP, bydefaylt it is having ingress rouuter pod IP
+if we put numproxy value as 1 then it will show the client IP and we can use this in header based rouning then.
+
