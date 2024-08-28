@@ -1,5 +1,7 @@
 MAke changes in SMCP for the numproxies.
 
+OpenShift
+
 DOC:- https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers#config-http-conn-man-headers-x-forwarded-for
       https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#:~:text=Required-,numTrustedProxies,-uint32
 ~~~
@@ -32,7 +34,7 @@ spec:
   gateways:
   - python-gw
   hosts:
-  - testing-reproducer.apps.xxxx.lab.psi.xxxx.xxxx.com
+  - testing-reproducer.apps.xxxx.xxx.xxx.xxxx.xxxx.com
   http:
   - match:
     - headers:
