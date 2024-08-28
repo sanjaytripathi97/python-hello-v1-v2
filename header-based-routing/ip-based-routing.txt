@@ -53,6 +53,7 @@ spec:
 ~~~
 
 by default X-forwarded-for having 2-3 IP's consist of client IP, routerpod Ip and all inbetween hops, but need to do IP based routing using clinet IP.
-by default x-envoy-external-address have router pod IP address? how to get single client IP, in XFF it is not possible, but we can have the x-envoy-external-address contaions client IP, bydefaylt it is having ingress rouuter pod IP
+by default x-envoy-external-address have router pod IP address? how to get single client IP, in XFF it is not possible, but we can have the x-envoy-external-address contaions client IP, 
+bydefault it is having ingress rouuter pod IP
 if we put numproxy value as 1 then it will show the client IP and we can use this in header based rouning then.
 
