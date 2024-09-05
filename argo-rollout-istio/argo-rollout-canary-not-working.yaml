@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: rollouts-demo
+spec:
+  replicas: 5
+  strategy:
+    canary:
+      canaryService: rollouts-demo
+      stableService: rollouts-demo-demo
+      trafficRouting:
+        istio:
+          virtualService:
+            name: python-vs
+      steps:
+      - setWeight: 5
+      - pause:
+          duration: 10m
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: rollouts-demo
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: rollouts-demo
+    spec:
+      containers:
+      - name: rollouts-demo
+        image: xxxxx
+        ports:
+        - name: http
+          containerPort: 8000
+          protocol: TCP
+        resources:
+          requests:
+            memory: 32Mi
+            cpu: 5m

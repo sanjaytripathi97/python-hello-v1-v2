@@ -1,0 +1,16 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: rollout-python
+  namespace: istio-system
+spec:
+  host: rollouts-demo.com
+  port:
+    targetPort: http2
+  to:
+    kind: Service
+    name: istio-ingressgateway
+    weight: 100
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
