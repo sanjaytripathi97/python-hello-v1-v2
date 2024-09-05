@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: rollouts-demo
-        image: quay.io/rhn_support_satripat/python-header-testing:v1
+        image: xxxxxx:v1
         ports:
         - name: http
           containerPort: 8000
