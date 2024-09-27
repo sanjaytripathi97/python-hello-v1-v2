@@ -86,8 +86,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -189,8 +188,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -315,8 +313,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -411,8 +408,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -535,8 +531,7 @@
                 "mode": "percentage",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -713,8 +708,7 @@
                 "mode": "percentage",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1764,7 +1758,7 @@
             "sort": 2,
             "value_type": "individual"
           },
-          "transform": "table",
+          "transform": "timeseries_to_rows",
           "type": "table-old",
           "xaxis": {
             "mode": "time",
@@ -1826,7 +1820,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 75
+            "y": 27
           },
           "hiddenSeries": false,
           "id": 6,
@@ -1910,7 +1904,7 @@
             "h": 7,
             "w": 12,
             "x": 12,
-            "y": 75
+            "y": 27
           },
           "hiddenSeries": false,
           "id": 7,
@@ -2680,8 +2674,8 @@
       {
         "current": {
           "selected": false,
-          "text": "python-app-metrics",
-          "value": "python-app-metrics"
+          "text": "default",
+          "value": "default"
         },
         "datasource": {
           "type": "prometheus",
@@ -2705,9 +2699,10 @@
       },
       {
         "current": {
+          "isNone": true,
           "selected": false,
-          "text": "python-698f4c94b-sk7dk",
-          "value": "python-698f4c94b-sk7dk"
+          "text": "None",
+          "value": ""
         },
         "datasource": {
           "type": "prometheus",
@@ -2763,6 +2758,6 @@
   "timezone": "UTC",
   "title": "Python APP Monitoring",
   "uid": "PYTHON-v256987",
-  "version": 16,
+  "version": 17,
   "weekStart": ""
 }
