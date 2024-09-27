@@ -1090,7 +1090,7 @@
       "type": "row"
     },
     {
-      "collapsed": false,
+      "collapsed": true,
       "datasource": {
         "type": "prometheus",
         "uid": "51e5ead5-1d6d-4a64-9632-8019a0a63f0a"
@@ -1102,7 +1102,690 @@
         "y": 3
       },
       "id": 17,
-      "panels": [],
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 100,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 0,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "MBs"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "requests"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#F2495C",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.fillOpacity",
+                    "value": 0
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 2
+                  },
+                  {
+                    "id": "custom.stacking",
+                    "value": {
+                      "group": "A",
+                      "mode": "none"
+                    }
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "limits"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#FF9830",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.fillOpacity",
+                    "value": 0
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 2
+                  },
+                  {
+                    "id": "custom.stacking",
+                    "value": {
+                      "group": "A",
+                      "mode": "none"
+                    }
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 4
+          },
+          "id": 25,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "10.4.3",
+          "targets": [
+            {
+              "datasource": {
+                "uid": "$datasource"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(python_memory_usage_bytes_sum{pod=\"$pod\", namespace=\"$namespace\"}[5m])) by (pod, namespace)",
+              "format": "time_series",
+              "legendFormat": "{{container}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Memory Usage in Bytes",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 100,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 0,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "requests"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#F2495C",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.fillOpacity",
+                    "value": 0
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 2
+                  },
+                  {
+                    "id": "custom.stacking",
+                    "value": {
+                      "group": "A",
+                      "mode": "none"
+                    }
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "limits"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#FF9830",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.fillOpacity",
+                    "value": 0
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 2
+                  },
+                  {
+                    "id": "custom.stacking",
+                    "value": {
+                      "group": "A",
+                      "mode": "none"
+                    }
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 11
+          },
+          "id": 26,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "10.4.3",
+          "targets": [
+            {
+              "datasource": {
+                "uid": "$datasource"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(python_memory_usage_bytes_sum{pod=\"$pod\", namespace=\"$namespace\"}[5m])) by (pod, namespace) / \nsum(rate(python_memory_usage_bytes_count{pod=\"$pod\", namespace=\"$namespace\"}[5m])) by (pod, namespace)",
+              "format": "time_series",
+              "legendFormat": "{{container}}",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "uid": "$datasource"
+              },
+              "expr": "sum(\n    kube_pod_container_resource_requests{job=\"kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", resource=\"memory\"}\n)\n",
+              "format": "time_series",
+              "legendFormat": "requests",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "uid": "$datasource"
+              },
+              "expr": "sum(\n    kube_pod_container_resource_limits{job=\"kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", resource=\"memory\"}\n)\n",
+              "format": "time_series",
+              "legendFormat": "limits",
+              "refId": "C"
+            }
+          ],
+          "title": "Average Memory Usage in Bytes",
+          "type": "timeseries"
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "columns": [],
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "uid": "$datasource"
+          },
+          "fill": 1,
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 18
+          },
+          "id": 5,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "showHeader": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "styles": [
+            {
+              "alias": "Time",
+              "align": "auto",
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "pattern": "Time",
+              "type": "hidden"
+            },
+            {
+              "alias": "Memory Usage (WSS)",
+              "align": "auto",
+              "colors": [],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "link": false,
+              "linkTargetBlank": false,
+              "linkTooltip": "Drill down",
+              "linkUrl": "",
+              "pattern": "Value #A",
+              "thresholds": [],
+              "type": "number",
+              "unit": "bytes"
+            },
+            {
+              "alias": "Memory Requests",
+              "align": "auto",
+              "colors": [],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "link": false,
+              "linkTargetBlank": false,
+              "linkTooltip": "Drill down",
+              "linkUrl": "",
+              "pattern": "Value #B",
+              "thresholds": [],
+              "type": "number",
+              "unit": "bytes"
+            },
+            {
+              "alias": "Memory Requests %",
+              "align": "auto",
+              "colors": [],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "link": false,
+              "linkTargetBlank": false,
+              "linkTooltip": "Drill down",
+              "linkUrl": "",
+              "pattern": "Value #C",
+              "thresholds": [],
+              "type": "number",
+              "unit": "percentunit"
+            },
+            {
+              "alias": "Memory Limits",
+              "align": "auto",
+              "colors": [],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "link": false,
+              "linkTargetBlank": false,
+              "linkTooltip": "Drill down",
+              "linkUrl": "",
+              "pattern": "Value #D",
+              "thresholds": [],
+              "type": "number",
+              "unit": "bytes"
+            },
+            {
+              "alias": "Memory Limits %",
+              "align": "auto",
+              "colors": [],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "link": false,
+              "linkTargetBlank": false,
+              "linkTooltip": "Drill down",
+              "linkUrl": "",
+              "pattern": "Value #E",
+              "thresholds": [],
+              "type": "number",
+              "unit": "percentunit"
+            },
+            {
+              "alias": "Memory Usage (RSS)",
+              "align": "auto",
+              "colors": [],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "link": false,
+              "linkTargetBlank": false,
+              "linkTooltip": "Drill down",
+              "linkUrl": "",
+              "pattern": "Value #F",
+              "thresholds": [],
+              "type": "number",
+              "unit": "bytes"
+            },
+            {
+              "alias": "Memory Usage (Cache)",
+              "align": "auto",
+              "colors": [],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "link": false,
+              "linkTargetBlank": false,
+              "linkTooltip": "Drill down",
+              "linkUrl": "",
+              "pattern": "Value #G",
+              "thresholds": [],
+              "type": "number",
+              "unit": "bytes"
+            },
+            {
+              "alias": "Memory Usage (Swap)",
+              "align": "auto",
+              "colors": [],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "link": false,
+              "linkTargetBlank": false,
+              "linkTooltip": "Drill down",
+              "linkUrl": "",
+              "pattern": "Value #H",
+              "thresholds": [],
+              "type": "number",
+              "unit": "bytes"
+            },
+            {
+              "alias": "Container",
+              "align": "auto",
+              "colors": [],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "link": false,
+              "linkTargetBlank": false,
+              "linkTooltip": "Drill down",
+              "linkUrl": "",
+              "pattern": "container",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "align": "auto",
+              "colors": [],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "datasource": {
+                "uid": "$datasource"
+              },
+              "expr": "sum(container_memory_working_set_bytes{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", container!=\"\", image!=\"\"}) by (container)",
+              "format": "table",
+              "instant": true,
+              "legendFormat": "",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "uid": "$datasource"
+              },
+              "expr": "sum(cluster:namespace:pod_memory:active:kube_pod_container_resource_requests{cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}) by (container)",
+              "format": "table",
+              "instant": true,
+              "legendFormat": "",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "uid": "$datasource"
+              },
+              "expr": "sum(container_memory_working_set_bytes{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", image!=\"\"}) by (container) / sum(cluster:namespace:pod_memory:active:kube_pod_container_resource_requests{cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}) by (container)",
+              "format": "table",
+              "instant": true,
+              "legendFormat": "",
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "uid": "$datasource"
+              },
+              "expr": "sum(cluster:namespace:pod_memory:active:kube_pod_container_resource_limits{cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}) by (container)",
+              "format": "table",
+              "instant": true,
+              "legendFormat": "",
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "uid": "$datasource"
+              },
+              "expr": "sum(container_memory_working_set_bytes{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", container!=\"\", image!=\"\"}) by (container) / sum(cluster:namespace:pod_memory:active:kube_pod_container_resource_limits{cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}) by (container)",
+              "format": "table",
+              "instant": true,
+              "legendFormat": "",
+              "refId": "E"
+            },
+            {
+              "datasource": {
+                "uid": "$datasource"
+              },
+              "expr": "sum(container_memory_rss{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", container != \"\", container != \"POD\"}) by (container)",
+              "format": "table",
+              "instant": true,
+              "legendFormat": "",
+              "refId": "F"
+            },
+            {
+              "datasource": {
+                "uid": "$datasource"
+              },
+              "expr": "sum(container_memory_cache{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", container != \"\", container != \"POD\"}) by (container)",
+              "format": "table",
+              "instant": true,
+              "legendFormat": "",
+              "refId": "G"
+            },
+            {
+              "datasource": {
+                "uid": "$datasource"
+              },
+              "expr": "sum(container_memory_swap{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", container != \"\", container != \"POD\"}) by (container)",
+              "format": "table",
+              "instant": true,
+              "legendFormat": "",
+              "refId": "H"
+            }
+          ],
+          "thresholds": [],
+          "title": "Memory Quota",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "transform": "table",
+          "type": "table-old",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "logBase": 1,
+              "min": 0,
+              "show": true
+            },
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": false
+            }
+          ]
+        }
+      ],
       "targets": [
         {
           "datasource": {
@@ -1116,688 +1799,6 @@
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "$datasource"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 100,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 0,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "MBs"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "requests"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#F2495C",
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 0
-              },
-              {
-                "id": "custom.lineWidth",
-                "value": 2
-              },
-              {
-                "id": "custom.stacking",
-                "value": {
-                  "group": "A",
-                  "mode": "none"
-                }
-              },
-              {
-                "id": "custom.lineStyle",
-                "value": {
-                  "dash": [
-                    10,
-                    10
-                  ],
-                  "fill": "dash"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "limits"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#FF9830",
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 0
-              },
-              {
-                "id": "custom.lineWidth",
-                "value": 2
-              },
-              {
-                "id": "custom.stacking",
-                "value": {
-                  "group": "A",
-                  "mode": "none"
-                }
-              },
-              {
-                "id": "custom.lineStyle",
-                "value": {
-                  "dash": [
-                    10,
-                    10
-                  ],
-                  "fill": "dash"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 4
-      },
-      "id": 25,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      },
-      "pluginVersion": "10.4.3",
-      "targets": [
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(python_memory_usage_bytes_sum{pod=\"$pod\", namespace=\"$namespace\"}[5m])) by (pod, namespace)",
-          "format": "time_series",
-          "legendFormat": "{{container}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Memory Usage in Bytes",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "$datasource"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 100,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 0,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "requests"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#F2495C",
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 0
-              },
-              {
-                "id": "custom.lineWidth",
-                "value": 2
-              },
-              {
-                "id": "custom.stacking",
-                "value": {
-                  "group": "A",
-                  "mode": "none"
-                }
-              },
-              {
-                "id": "custom.lineStyle",
-                "value": {
-                  "dash": [
-                    10,
-                    10
-                  ],
-                  "fill": "dash"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "limits"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#FF9830",
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 0
-              },
-              {
-                "id": "custom.lineWidth",
-                "value": 2
-              },
-              {
-                "id": "custom.stacking",
-                "value": {
-                  "group": "A",
-                  "mode": "none"
-                }
-              },
-              {
-                "id": "custom.lineStyle",
-                "value": {
-                  "dash": [
-                    10,
-                    10
-                  ],
-                  "fill": "dash"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 11
-      },
-      "id": 26,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      },
-      "pluginVersion": "10.4.3",
-      "targets": [
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(python_memory_usage_bytes_sum{pod=\"$pod\", namespace=\"$namespace\"}[5m])) by (pod, namespace) / \nsum(rate(python_memory_usage_bytes_count{pod=\"$pod\", namespace=\"$namespace\"}[5m])) by (pod, namespace)",
-          "format": "time_series",
-          "legendFormat": "{{container}}",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "sum(\n    kube_pod_container_resource_requests{job=\"kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", resource=\"memory\"}\n)\n",
-          "format": "time_series",
-          "legendFormat": "requests",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "sum(\n    kube_pod_container_resource_limits{job=\"kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", resource=\"memory\"}\n)\n",
-          "format": "time_series",
-          "legendFormat": "limits",
-          "refId": "C"
-        }
-      ],
-      "title": "Average Memory Usage in Bytes",
-      "type": "timeseries"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "columns": [],
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": {
-        "uid": "$datasource"
-      },
-      "fill": 1,
-      "fontSize": "100%",
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 18
-      },
-      "id": 5,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null as zero",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": true
-      },
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "styles": [
-        {
-          "alias": "Time",
-          "align": "auto",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "hidden"
-        },
-        {
-          "alias": "Memory Usage (WSS)",
-          "align": "auto",
-          "colors": [],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": false,
-          "linkTargetBlank": false,
-          "linkTooltip": "Drill down",
-          "linkUrl": "",
-          "pattern": "Value #A",
-          "thresholds": [],
-          "type": "number",
-          "unit": "bytes"
-        },
-        {
-          "alias": "Memory Requests",
-          "align": "auto",
-          "colors": [],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": false,
-          "linkTargetBlank": false,
-          "linkTooltip": "Drill down",
-          "linkUrl": "",
-          "pattern": "Value #B",
-          "thresholds": [],
-          "type": "number",
-          "unit": "bytes"
-        },
-        {
-          "alias": "Memory Requests %",
-          "align": "auto",
-          "colors": [],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": false,
-          "linkTargetBlank": false,
-          "linkTooltip": "Drill down",
-          "linkUrl": "",
-          "pattern": "Value #C",
-          "thresholds": [],
-          "type": "number",
-          "unit": "percentunit"
-        },
-        {
-          "alias": "Memory Limits",
-          "align": "auto",
-          "colors": [],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": false,
-          "linkTargetBlank": false,
-          "linkTooltip": "Drill down",
-          "linkUrl": "",
-          "pattern": "Value #D",
-          "thresholds": [],
-          "type": "number",
-          "unit": "bytes"
-        },
-        {
-          "alias": "Memory Limits %",
-          "align": "auto",
-          "colors": [],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": false,
-          "linkTargetBlank": false,
-          "linkTooltip": "Drill down",
-          "linkUrl": "",
-          "pattern": "Value #E",
-          "thresholds": [],
-          "type": "number",
-          "unit": "percentunit"
-        },
-        {
-          "alias": "Memory Usage (RSS)",
-          "align": "auto",
-          "colors": [],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": false,
-          "linkTargetBlank": false,
-          "linkTooltip": "Drill down",
-          "linkUrl": "",
-          "pattern": "Value #F",
-          "thresholds": [],
-          "type": "number",
-          "unit": "bytes"
-        },
-        {
-          "alias": "Memory Usage (Cache)",
-          "align": "auto",
-          "colors": [],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": false,
-          "linkTargetBlank": false,
-          "linkTooltip": "Drill down",
-          "linkUrl": "",
-          "pattern": "Value #G",
-          "thresholds": [],
-          "type": "number",
-          "unit": "bytes"
-        },
-        {
-          "alias": "Memory Usage (Swap)",
-          "align": "auto",
-          "colors": [],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": false,
-          "linkTargetBlank": false,
-          "linkTooltip": "Drill down",
-          "linkUrl": "",
-          "pattern": "Value #H",
-          "thresholds": [],
-          "type": "number",
-          "unit": "bytes"
-        },
-        {
-          "alias": "Container",
-          "align": "auto",
-          "colors": [],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": false,
-          "linkTargetBlank": false,
-          "linkTooltip": "Drill down",
-          "linkUrl": "",
-          "pattern": "container",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colors": [],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        }
-      ],
-      "targets": [
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "sum(container_memory_working_set_bytes{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", container!=\"\", image!=\"\"}) by (container)",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "sum(cluster:namespace:pod_memory:active:kube_pod_container_resource_requests{cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}) by (container)",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "sum(container_memory_working_set_bytes{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", image!=\"\"}) by (container) / sum(cluster:namespace:pod_memory:active:kube_pod_container_resource_requests{cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}) by (container)",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "",
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "sum(cluster:namespace:pod_memory:active:kube_pod_container_resource_limits{cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}) by (container)",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "",
-          "refId": "D"
-        },
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "sum(container_memory_working_set_bytes{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", container!=\"\", image!=\"\"}) by (container) / sum(cluster:namespace:pod_memory:active:kube_pod_container_resource_limits{cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}) by (container)",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "",
-          "refId": "E"
-        },
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "sum(container_memory_rss{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", container != \"\", container != \"POD\"}) by (container)",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "",
-          "refId": "F"
-        },
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "sum(container_memory_cache{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", container != \"\", container != \"POD\"}) by (container)",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "",
-          "refId": "G"
-        },
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "sum(container_memory_swap{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", container != \"\", container != \"POD\"}) by (container)",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "",
-          "refId": "H"
-        }
-      ],
-      "thresholds": [],
-      "title": "Memory Quota",
-      "tooltip": {
-        "shared": true,
-        "sort": 2,
-        "value_type": "individual"
-      },
-      "transform": "table",
-      "type": "table-old",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "logBase": 1,
-          "min": 0,
-          "show": true
-        },
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": false
-        }
-      ]
-    },
-    {
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
@@ -1807,7 +1808,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 25
+        "y": 4
       },
       "id": 19,
       "panels": [
@@ -1825,7 +1826,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 27
+            "y": 75
           },
           "hiddenSeries": false,
           "id": 6,
@@ -1909,7 +1910,7 @@
             "h": 7,
             "w": 12,
             "x": 12,
-            "y": 27
+            "y": 75
           },
           "hiddenSeries": false,
           "id": 7,
@@ -2002,7 +2003,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 5
       },
       "id": 20,
       "panels": [
@@ -2197,7 +2198,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 27
+        "y": 6
       },
       "id": 21,
       "panels": [
@@ -2392,7 +2393,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 7
       },
       "id": 22,
       "panels": [
@@ -2606,7 +2607,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 29
+        "y": 8
       },
       "id": 18,
       "panels": [],
@@ -2633,8 +2634,8 @@
       {
         "current": {
           "selected": false,
-          "text": "prometheus-default-monitoring",
-          "value": "51e5ead5-1d6d-4a64-9632-8019a0a63f0a"
+          "text": "default",
+          "value": "default"
         },
         "hide": 0,
         "includeAll": false,
@@ -2731,7 +2732,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
