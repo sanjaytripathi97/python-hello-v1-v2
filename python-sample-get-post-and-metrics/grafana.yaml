@@ -1,0 +1,142 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: credentials
+  namespace: grafana-operator
+stringData:
+  GF_SECURITY_ADMIN_PASSWORD: grafana
+  GF_SECURITY_ADMIN_USER: root
+type: Opaque
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: Grafana
+metadata:
+  name: grafana
+  namespace: grafana-operator
+  labels:
+    dashboards: "grafana"
+    folders: "grafana"
+spec:
+  deployment:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: grafana
+              env:
+                - name: GF_SECURITY_ADMIN_USER
+                  valueFrom:
+                    secretKeyRef:
+                      key: GF_SECURITY_ADMIN_USER
+                      name: credentials
+                - name: GF_SECURITY_ADMIN_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      key: GF_SECURITY_ADMIN_PASSWORD
+                      name: credentials
+  config:
+    auth:
+      disable_login_form: "false"
+      disable_signout_menu: "true"
+    auth.anonymous:
+      enabled: "false"
+    log:
+      level: warn
+      mode: console
+  version: 10.4.3
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: grafana
+  namespace: grafana-operator
+  labels:
+    app.kubernetes.io/managed-by: grafana-operator
+spec:
+  to:
+    kind: Service
+    name: grafana-service
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+    destinationCACertificate: ''
+  host: grafana-manual.xxxxx.com
+  port:
+    targetPort: grafana
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: token-prometheus
+  namespace: grafana-operator
+stringData:
+  PROMETHEUS_TOKEN: 'EJj8kODqEM_4P5g'
+type: Opaque
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDatasource
+metadata:
+  name: grafana-ds
+  namespace: grafana-operator  
+spec:
+  valuesFrom:
+    - targetPath: "secureJsonData.httpHeaderValue1"
+      valueFrom:
+        secretKeyRef:
+          name: "token-prometheus"
+          key: "PROMETHEUS_TOKEN"
+  instanceSelector:
+    matchLabels:
+      dashboards: "grafana"
+  datasource:
+    name: Prometheus
+    type: prometheus
+    access: proxy
+    url: https://thanos-querier.openshift-monitoring.svc.cluster.local:9091
+    isDefault: true
+    jsonData:
+      "tlsSkipVerify": true
+      "timeInterval": "5s"
+      httpHeaderName1: 'Authorization'
+    secureJsonData:
+      "httpHeaderValue1": "Bearer ${PROMETHEUS_TOKEN}"
+    editable: true
+---
+##istio
+kind: Secret
+apiVersion: v1
+metadata:
+  name: token-prometheus-istio
+  namespace: grafana-operator
+stringData:
+  PROMETHEUS_TOKEN: 'DNUltZS9CU014NQ=='
+type: Opaque
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDatasource
+metadata:
+  name: grafana-ds-istio
+  namespace: grafana-operator  
+spec:
+  valuesFrom:
+    - targetPath: "secureJsonData.httpHeaderValue1"
+      valueFrom:
+        secretKeyRef:
+          name: "token-prometheus-istio"
+          key: "PROMETHEUS_TOKEN"
+  instanceSelector:
+    matchLabels:
+      dashboards: "grafana"
+  datasource:
+    name: Prometheus-istio
+    type: prometheus
+    access: proxy
+    url: https://prometheus.istio-system.svc.cluster.local:9090
+    isDefault: true
+    jsonData:
+      "tlsSkipVerify": true
+      "timeInterval": "5s"
+      httpHeaderName1: 'Authorization'
+    secureJsonData:
+      "httpHeaderValue1": "Basic ${PROMETHEUS_TOKEN}"
+    editable: true
