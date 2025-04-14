@@ -1,0 +1,35 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: python-vs
+spec:
+  hosts:
+    - "xxxxxxxx"
+  gateways:
+    - python-gw
+  http:
+    - match:
+      - uri:
+          prefix: "/abc"
+      - headers:
+          x-forwarded-for:
+             regex: ^.*(192.168.122.xx).*$
+      rewrite:
+        uri: '/'
+      route:
+      - destination:
+           host: python-svc
+           port:
+             number: 8000
+           subset: python-v1
+    - match:
+      - uri:
+          prefix: "/abc"
+      rewrite:
+        uri: '/'
+      route:
+      - destination:
+           host: python-svc
+           port:
+             number: 8000
+           subset: python-v2
