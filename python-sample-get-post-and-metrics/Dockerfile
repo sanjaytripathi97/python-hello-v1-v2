@@ -1,18 +1,25 @@
-# Use Red Hat Universal Base Image with Python 3.9
-FROM registry.access.redhat.com/ubi8/python-39
+# Use Red Hat UBI9 with Python 3.11
+FROM registry.access.redhat.com/ubi9/python-311
 
-# Install required Python packages
-RUN pip install prometheus_client psutil
+# Switch to root to install packages
+USER root
 
-# Expose ports for the HTTP server and metrics
+# Optional: update OS packages
+RUN dnf -y update && dnf clean all
+
+# Upgrade pip and install Python dependencies
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir prometheus_client psutil
+
+# Expose ports
 EXPOSE 8000
 EXPOSE 8001
 
-# Set the working directory inside the container
+# Set working directory
 WORKDIR /opt/app-root/src
 
-# Copy the application files into the container
+# Copy application files
 COPY . /opt/app-root/src
 
-# Run the Python HTTP server
+# Run the Python web server
 CMD ["python3", "-u", "web.py"]
