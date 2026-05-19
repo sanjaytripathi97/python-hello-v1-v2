@@ -7,6 +7,9 @@ USER root
 # Optional: update OS packages
 RUN dnf -y update && dnf clean all
 
+# Install networking and troubleshooting tools
+RUN dnf -y install bind-utils iputils nmap-ncat && dnf clean all
+
 # Upgrade pip and install Python dependencies
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir prometheus_client psutil
